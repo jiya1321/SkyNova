@@ -1,5 +1,5 @@
 // ============================================
-// Weather Dashboard - Dashboard JavaScript
+// SkyNova - Dashboard JavaScript
 // WeatherAPI.com Integration and Dashboard Logic
 // ============================================
 
@@ -142,8 +142,32 @@ const navItems = document.querySelectorAll('.nav-item[data-section]');
 navItems.forEach(item => {
     item.addEventListener('click', (e) => {
         e.preventDefault();
+        const section = item.getAttribute('data-section');
+        
         navItems.forEach(nav => nav.classList.remove('active'));
         item.classList.add('active');
+        
+        // Handle different sections
+        switch(section) {
+            case 'dashboard':
+                scrollToTop();
+                break;
+            case 'weather':
+                scrollToTop();
+                break;
+            case 'forecast':
+                scrollToSection('.forecast-section');
+                break;
+            case 'maps':
+                showToast('Map feature coming soon!', 'warning');
+                break;
+            case 'recent':
+                scrollToSection('.recent-searches-section');
+                break;
+            case 'alerts':
+                showToast('Weather alerts coming soon!', 'warning');
+                break;
+        }
         
         // Close sidebar on mobile
         if (window.innerWidth <= 1024) {
@@ -151,6 +175,23 @@ navItems.forEach(item => {
         }
     });
 });
+
+// ============================================
+// Scroll to Top
+// ============================================
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================
+// Scroll to Section
+// ============================================
+function scrollToSection(selector) {
+    const element = document.querySelector(selector);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
 
 // ============================================
 // Logout
@@ -809,26 +850,3 @@ if (detectLocationBtn) {
         }
     });
 }
-
-// ============================================
-// Premium Upgrade Button (Placeholder)
-// ============================================
-document.querySelector('.upgrade-btn')?.addEventListener('click', () => {
-    showToast('Premium upgrade coming soon!', 'warning');
-});
-
-// ============================================
-// View More Insights Button (Placeholder)
-// ============================================
-document.querySelector('.view-more-btn')?.addEventListener('click', () => {
-    showToast('More AI insights coming soon!', 'warning');
-});
-
-// ============================================
-// Zoom Controls (Placeholder)
-// ============================================
-document.querySelectorAll('.zoom-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        showToast('Map zoom controls coming soon!', 'warning');
-    });
-});
