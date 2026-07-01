@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="white"/>
+                        <path d="M50 25C50 25 35 35 35 50C35 65 50 75 50 75C50 75 65 65 65 50C65 35 50 25 50 25Z" fill="#2563EB"/>
+                        <circle cx="50" cy="50" r="15" fill="#FBBF24"/>
+                    </svg>
+                </div>
+                <span class="app-name">Weather</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="weather">
+                    <span class="nav-icon">🌤️</span>
+                    <span class="nav-text">Weather</span>
+                </a>
+                <a href="#" class="nav-item" data-section="forecast">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Forecast</span>
+                </a>
+                <a href="#" class="nav-item" data-section="maps">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-text">Maps</span>
+                </a>
+                <a href="#" class="nav-item" data-section="favorites">
+                    <span class="nav-icon">⭐</span>
+                    <span class="nav-text">Favorites</span>
+                </a>
+                <a href="#" class="nav-item" data-section="recent">
+                    <span class="nav-icon">🕐</span>
+                    <span class="nav-text">Recent Searches</span>
+                </a>
+                <a href="#" class="nav-item" data-section="alerts">
+                    <span class="nav-icon">🔔</span>
+                    <span class="nav-text">Alerts</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+
+            <!-- Premium Upgrade Card -->
+            <div class="premium-card">
+                <h4>✨ Upgrade to Pro</h4>
+                <p>Unlock advanced features</p>
+                <button class="upgrade-btn">Upgrade Now</button>
+            </div>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item logout-btn" id="logoutBtn">
+                    <span class="nav-icon">🚪</span>
+                    <span class="nav-text">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="citySearch" placeholder="Search city..." autocomplete="off">
+                    <button class="search-btn" id="searchBtn">Search</button>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="location-btn" id="locationBtn" title="Detect My Location">
+                        📍
+                    </button>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                        🌙
+                    </button>
+                    <button class="notification-btn" title="Notifications">
+                        🔔
+                    </button>
+                    <div class="user-profile">
+                        <img src="assets/avatar.svg" alt="User Avatar" class="avatar" id="userAvatar">
+                        <span class="username" id="displayUsername">User</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-area">
+                <!-- Greeting Section -->
+                <div class="greeting-section">
+                    <h1 id="greeting">Good Morning!</h1>
+                    <p class="current-time" id="currentTime">Loading...</p>
+                </div>
+
+                <!-- Weather Hero Card -->
+                <div class="weather-hero" id="weatherHero">
+                    <div class="hero-background" id="heroBackground"></div>
+                    <div class="hero-content">
+                        <div class="hero-left">
+                            <div class="location-info">
+                                <h2 id="cityName">--</h2>
+                                <p id="countryName">--</p>
+                            </div>
+                            <div class="date-info">
+                                <p id="currentDate">--</p>
+                            </div>
+                        </div>
+                        <div class="hero-center">
+                            <div class="weather-icon-large" id="weatherIcon">
+                                <span class="icon-emoji">🌤️</span>
+                            </div>
+                            <div class="temperature">
+                                <span id="temperature">--</span>
+                                <span class="degree">°C</span>
+                            </div>
+                            <p class="weather-condition" id="weatherCondition">--</p>
+                        </div>
+                        <div class="hero-right">
+                            <div class="feels-like">
+                                <span class="label">Feels Like</span>
+                                <span id="feelsLike">--°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Details Grid -->
+                <div class="weather-details">
+                    <div class="detail-card">
+                        <div class="card-icon">💧</div>
+                        <div class="card-content">
+                            <span class="card-label">Humidity</span>
+                            <span class="card-value" id="humidity">--%</span>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="card-icon">💨</div>
+                        <div class="card-content">
+                            <span class="card-label">Wind Speed</span>
+                            <span class="card-value" id="windSpeed">-- km/h</span>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="card-icon">🌡️</div>
+                        <div class="card-content">
+                            <span class="card-label">Pressure</span>
+                            <span class="card-value" id="pressure">-- hPa</span>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="card-icon">👁️</div>
+                        <div class="card-content">
+                            <span class="card-label">Visibility</span>
+                            <span class="card-value" id="visibility">-- km</span>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="card-icon">☀️</div>
+                        <div class="card-content">
+                            <span class="card-label">UV Index</span>
+                            <span class="card-value" id="uvIndex">--</span>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="card-icon">🌅</div>
+                        <div class="card-content">
+                            <span class="card-label">Sunrise</span>
+                            <span class="card-value" id="sunrise">--</span>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="card-icon">🌇</div>
+                        <div class="card-content">
+                            <span class="card-label">Sunset</span>
+                            <span class="card-value" id="sunset">--</span>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="card-icon">🌬️</div>
+                        <div class="card-content">
+                            <span class="card-label">Air Quality</span>
+                            <span class="card-value" id="airQuality">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forecast Section -->
+                <div class="forecast-section">
+                    <h3>7-Day Forecast</h3>
+                    <div class="forecast-cards" id="forecastCards">
+                        <!-- Forecast cards will be dynamically added -->
+                        <div class="forecast-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="forecast-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="forecast-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="forecast-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="forecast-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="forecast-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="forecast-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hourly Forecast -->
+                <div class="hourly-forecast-section">
+                    <h3>Hourly Forecast</h3>
+                    <div class="hourly-forecast" id="hourlyForecast">
+                        <!-- Hourly cards will be dynamically added -->
+                        <div class="hourly-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="hourly-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="hourly-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="hourly-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="hourly-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="hourly-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="hourly-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="hourly-card skeleton">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-icon"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Weather Insight -->
+                <div class="ai-insight-section">
+                    <div class="ai-insight-card">
+                        <div class="ai-insight-content">
+                            <div class="ai-robot">🤖</div>
+                            <div class="ai-insight-text">
+                                <h3><span class="ai-badge">AI</span> Weather Insights</h3>
+                                <p>Based on current conditions, expect mild temperatures with a chance of light rain in the afternoon. Perfect for outdoor activities!</p>
+                                <button class="view-more-btn">View More Insights</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wind Map -->
+                <div class="wind-map-section">
+                    <h3>Live Wind Map</h3>
+                    <div class="wind-map-card">
+                        <div class="map-container">
+                            <div class="map-placeholder">
+                                <span>🗺️ Interactive wind map coming soon</span>
+                            </div>
+                            <div class="live-view-badge">LIVE</div>
+                            <div class="zoom-controls">
+                                <button class="zoom-btn">+</button>
+                                <button class="zoom-btn">-</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Searches -->
+                <div class="recent-searches-section">
+                    <h3>Recent Searches</h3>
+                    <div class="recent-searches" id="recentSearches">
+                        <p class="no-searches">No recent searches</p>
+                    </div>
+                    <button class="clear-all-btn" id="clearAllBtn" style="display: none;">Clear All</button>
+                </div>
+
+                <!-- Location Banner -->
+                <div class="location-banner-section">
+                    <div class="location-banner">
+                        <div class="location-banner-content">
+                            <span class="location-banner-icon">📍</span>
+                            <div class="location-banner-text">
+                                <p>Enable location services</p>
+                                <span>Get accurate weather for your current location</span>
+                            </div>
+                        </div>
+                        <button class="detect-location-btn" id="detectLocationBtn">Detect My Location</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Loading weather data...</p>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

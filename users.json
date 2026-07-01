@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "password123",
+      "email": "admin@weather.com"
+    },
+    {
+      "username": "student",
+      "password": "jsbasic2026",
+      "email": "student@weather.com"
+    }
+  ]
+}
