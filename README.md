@@ -1,6 +1,6 @@
 # 🌤️ SkyNova – Premium Weather Dashboard
 
-**SkyNova** is a modern, responsive, and feature-rich weather dashboard built using **HTML, CSS, and Vanilla JavaScript**. It provides real-time weather updates, multi-day forecasts, user authentication, location-based weather information, and a premium glassmorphism-inspired interface.
+**SkyNova** is a modern, responsive, and feature-rich weather dashboard built using **HTML, CSS, and JavaScript**. It provides real-time weather updates, multi-day forecasts, user authentication, location-based weather information, and a premium glassmorphism-inspired interface.
 
 Designed as a **Web Development Mini Project**, SkyNova demonstrates modern frontend development concepts, API integration, responsive design, and clean UI/UX practices.
 
